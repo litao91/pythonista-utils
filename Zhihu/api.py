@@ -9,11 +9,8 @@ HEADERS = {
 }
 
 def fetch_news_list():
-	req = requests.get(api_url + 'latest', headers=HEADERS).json()
-	return req
-	
+    req = requests.get(api_url + 'latest', headers=HEADERS).json()
+    return req
+
 def fetch_news(id_str):
     return requests.get(api_url + id_str, headers=HEADERS).json()
-    
-
-
