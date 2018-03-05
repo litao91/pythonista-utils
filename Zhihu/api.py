@@ -23,9 +23,9 @@ def gen_page(news):
         <html>
         <head>
         <link rel="stylesheet" type="text/css" href="$cssurl">
-        <img src="$image" alt="$image_source">
         </head>
         <body>
+        <img src="$image" alt="$image_source">
         $body
         </body>
         </html>
