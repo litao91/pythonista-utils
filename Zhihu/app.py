@@ -55,7 +55,6 @@ class Zhihu(object):
         article_table = ArticleListTable(self)
         self.nav_view = ui.NavigationView(article_table.view)
         self.nav_view.name = '知乎日报'
-        self.nav_view.navigation_bar_hidden = True
         self.nav_view.add_subview(self.activity_indicator)
         self.activity_indicator.frame = (0, 0, self.nav_view.width, self.nav_view.height)
         self.activity_indicator.bring_to_front()
