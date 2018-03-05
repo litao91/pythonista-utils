@@ -32,11 +32,12 @@ class ArticleListTable(object):
     @ui.in_background
     def article_item_tabbed(self, sender):
         self.app.activity_indicator.start()
-        article_id = sender.items[sender.selected_row]['id']
-        article_detail = api.fetch_news(article_id)
         try:
+            article_id = sender.items[sender.selected_row]['id']
+            article_detail = api.fetch_news(article_id)
+            content = api.gen_page(article_detail)
             webview = ui.WebView()
-            webview.load_html(article_detail['body'])
+            webview.load_html(content)
             self.app.nav_view.push_view(webview)
         except Exception as e:
             print(str(e))
