@@ -18,6 +18,23 @@ def fetch_news(id_str):
 
 
 def gen_page(news):
+    image = Template(
+        '''
+<div class="img-wrap">
+<h1 class="headline-title">$title</h1>
+
+
+<span class="img-source">$image_source</span>
+
+
+<img src="$image" alt="">
+<div class="img-mask"></div>
+</div>
+        ''').safe_substitute(
+            title=news['title'],
+            image_source=news['image_source'],
+            image=news['image']
+        )
     template = Template(
         '''
         <html>
@@ -39,4 +56,4 @@ def gen_page(news):
         cssurl=cssurl,
         body=body,
         image=news['image'],
-        image_source=news['image_source'])
+        image_source=news['image_source']).replace('<div class="img-place-holder"></div>', image)
