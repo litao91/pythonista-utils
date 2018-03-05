@@ -13,4 +13,4 @@ def fetch_news_list():
     return req
 
 def fetch_news(id_str):
-    return requests.get(api_url + id_str, headers=HEADERS).json()
+    return requests.get(api_url + str(id_str), headers=HEADERS).json()

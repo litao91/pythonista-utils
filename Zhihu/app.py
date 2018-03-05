@@ -1,4 +1,5 @@
 import ui
+import console
 import api
 
 class ArticleListTable(object):
@@ -21,7 +22,7 @@ class ArticleListTable(object):
                 for i in self.article_list['stories']]
             articles_listdatasource = ui.ListDataSource(data)
             articles_listdatasource.delete_enabled = False
-            article_listdatasource.action = self.article_item_tabbed
+            articles_listdatasource.action = self.article_item_tabbed
             self.view.data_source = articles_listdatasource
             self.view.delegate = articles_listdatasource
             self.view.reload()
@@ -31,14 +32,15 @@ class ArticleListTable(object):
     @ui.in_background
     def article_item_tabbed(self, sender):
         self.app.activity_indicator.start()
-        article_id = sender.selected_row['id']
-        article_detail = api.get_news(article_id)
+        article_id = sender.items[sender.selected_row]['id']
+        article_detail = api.fetch_news(article_id)
         try:
             webview = ui.WebView()
             webview.load_html(article_detail['body'])
             self.app.nav_view.push_view(webview)
         except Exception as e:
-            console.hue_alert('Failed to load article', 'error', 1.0)
+            print(str(e))
+            console.hud_alert('Failed to load article', 'error', 1.0)
         finally:
             self.app.activity_indicator.stop()
 
