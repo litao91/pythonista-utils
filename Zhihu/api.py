@@ -22,8 +22,8 @@ def gen_page(news):
         '''
         <html>
         <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="stylesheet" type="text/css" href="$cssurl">
+        <img src="$image" alt="$image_source">
         </head>
         <body>
         $body
@@ -34,4 +34,6 @@ def gen_page(news):
     cssurl = news['css'][0]
     return template.safe_substitute(
         cssurl=cssurl,
-        body=body)
+        body=body,
+        image=news['image'],
+        image_source=news['image_source'])
